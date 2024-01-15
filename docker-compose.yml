@@ -1,0 +1,12 @@
+version: '3.9'
+
+services:
+  tests:
+    command: pytest tests/ -v
+    tty: true
+    stdin_open: true
+    build:
+      context: .
+    volumes:
+      - ./hivemind:/home/hivemind
+      - ./tests:/home/tests

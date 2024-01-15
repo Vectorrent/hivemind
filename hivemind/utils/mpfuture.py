@@ -200,6 +200,8 @@ class MPFuture(base.Future, Generic[ResultType]):
                     future.cancel()
                 else:
                     raise RuntimeError(f"Received unexpected update type {update_type}")
+            except (TypeError):
+                logger.debug(f"Data from the pipe was in a strange format (pid={pid})")
             except (BrokenPipeError, EOFError, ConnectionError):
                 logger.debug(f"Update pipe was was shut down unexpectedly (pid={pid})")
             except Exception as e:
